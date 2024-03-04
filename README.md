@@ -10,9 +10,9 @@ Tema:
 
 Extensões:
 - Code Runner
+- Material Icon Theme
 - Codeium
 - intelliCode
-- Material Icon Theme
 - npm Intellisense
 - Path Intellisense
 - DotENV
