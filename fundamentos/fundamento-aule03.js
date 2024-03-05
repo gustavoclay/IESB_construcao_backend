@@ -146,16 +146,15 @@ console.log(Number.parseFloat(numeroIntero).toFixed(2))
 
 let valorEmDolar = 10.54
 
-console.log(valorEmDolar.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
+// console.log(valorEmDolar.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
 
-console.log(valorEmDolar.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' }))
+// console.log(valorEmDolar.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' }))
 
 
 let idadeUser = "20"
 console.log(Number(idadeUser))
 
-
-
+console.log(Math.PI)
 
 
 
