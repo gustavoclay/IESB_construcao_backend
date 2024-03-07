@@ -56,3 +56,60 @@ JS
     Operadores relacionais
         > < >= <= == !=
         === !==
+
+    Operadores lógicos
+        ! negação
+        && E
+        || OU
+        
+        
+    Condições
+        if else
+        ternário ? :
+
+        switch(condicao) {
+            case valor1:
+                comando
+                break
+            default:
+                break
+        }
+
+    Repetição
+
+        // Testa a condição no inicio
+        let contador = 0
+        while (condicao) {
+            comando
+            contador++
+        }
+
+        // Testa a condição no fim
+        let contador = 0
+        do {
+            comando
+            contador++
+        } while (condicao)
+
+        // laço for
+        // inicialização: condição: incremento
+        for (let c = 1; c < 5 ; c++){
+            comando
+        }
+
+    Funções
+        function executa() {
+            console.log("TESTE")
+        }
+
+        function soma(n1, n2) {
+            return n1 + n2;
+        }
+
+        const soma = (n1, n2) => {
+            return n1 + n2;
+        }
+
+        const soma = (n1,n2) => n1 + n2
+
+ 
