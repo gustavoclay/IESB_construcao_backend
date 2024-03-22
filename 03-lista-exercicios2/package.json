@@ -1,0 +1,16 @@
+{
+  "name": "03-lista-exercicios2",
+  "version": "1.0.0",
+  "description": "lista de exercicios 2",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gustavo Clay",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.1",
+    "nodemon": "^3.1.0"
+  }
+}
