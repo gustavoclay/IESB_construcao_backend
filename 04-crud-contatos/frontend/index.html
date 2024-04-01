@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    form {
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>CRUD Contatos</h1>
+
+  <form id="createForm">
+    <input type="text" id="nome" placeholder="Nome" required>
+    <button type="submit">Adicionar Contato</button>
+  </form>
+
+  <form id="searchForm">
+    <input type="text" id="searchInput" placeholder="Buscar contato" required>
+    <button type="submit">Buscar Contato</button>
+  </form>
+
+  <form id="updateForm">
+    <input type="number" id="updateId" placeholder="ID" required>
+    <input type="text" id="updateName" placeholder="Novo Nome" required>
+    <button type="submit">Atualizar Contato</button>
+  </form>
+
+  <form id="deleteForm">
+    <input type="number" id="deleteId" placeholder="ID" required>
+    <button type="submit">Excluir Contato</button>
+  </form>
+
+  <h2>Lista de Contatos</h2>
+
+  <ul id="contatosList"></ul>
+
+  <script>
+    // Função para carregar contatos
+    function loadContatos() {
+      fetch('http://localhost:3000/contatos')
+        .then(response => response.json())
+        .then(contatos => {
+          const contatosList = document.getElementById('contatosList');
+          contatosList.innerHTML = '';
+          contatos.forEach((contato, index) => {
+            const li = document.createElement('li');
+            li.textContent = `${index}: ${contato}`;
+            contatosList.appendChild(li);
+          });
+        });
+    }
+
+    // Função para adicionar um novo contato
+    document.getElementById('createForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const nome = document.getElementById('nome').value;
+      fetch('http://localhost:3000/contatos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nome: nome })
+      })
+        .then(response => {
+          if (response.ok) {
+            loadContatos();
+            document.getElementById('nome').value = '';
+          }
+        });
+    });
+
+    // Função para buscar um contato específico
+    document.getElementById('searchForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const searchInput = document.getElementById('searchInput').value;
+      fetch(`http://localhost:3000/contatos/${searchInput}`)
+        .then(response => response.json())
+        .then(contato => {
+          alert(`Contato encontrado: ${contato}`);
+        })
+        .catch(error => {
+          alert('Contato não encontrado');
+        });
+    });
+
+    // Função para atualizar um contato
+    document.getElementById('updateForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const id = document.getElementById('updateId').value;
+      const nome = document.getElementById('updateName').value;
+      fetch(`http://localhost:3000/contatos/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nome: nome })
+      })
+        .then(response => {
+          if (response.ok) {
+            loadContatos();
+            document.getElementById('updateId').value = '';
+            document.getElementById('updateName').value = '';
+          }
+        });
+    });
+
+    // Função para excluir um contato
+    document.getElementById('deleteForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const id = document.getElementById('deleteId').value;
+      fetch(`http://localhost:3000/contatos/${id}`, {
+        method: 'DELETE'
+      })
+        .then(response => {
+          if (response.ok) {
+            loadContatos();
+            document.getElementById('deleteId').value = '';
+          }
+        });
+    });
+
+    // Carregar contatos assim que a página carregar
+    document.addEventListener('DOMContentLoaded', function () {
+      loadContatos();
+    });
+  </script>
+
+</body>
+
+</html>
