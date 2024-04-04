@@ -1,11 +1,14 @@
 // IMPORTS
 const express = require('express')
+const cors = require('cors')
 const tutorial = require('./routes/tutorial')
 const subrota = require('./routes/subrota')
 const contatos = require('./routes/contatos')
 
 // CONFIGURACAO
 const app = express()
+// CONFIGURACAO DE CORS
+app.use(cors({origin: '*'}))
 
 // MIDDLEWARES
 // middleware que transforma o corpo da requisição em objeto json
