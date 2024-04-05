@@ -48,6 +48,33 @@ router.post('/produtos', (req, res) => {
     res.json({ mensagem: "Produto cadastrado com sucesso!"})
 })
 
+// DELETE  -> Deletar um produto
+router.delete('/produtos/:id', (req, res) => {
+    const id = req.params.id
+    const index = listaProdutos.findIndex(produto => produto.id == id)
+    listaProdutos.splice(index, 1)
+    res.json({ mensagem: "Produto excluido com sucesso"})
+})
+
+// UPDATE -> Alterar um produto
+router.put('/produtos/:id', (req, res) => {
+    const id = req.params.id
+    const novosDados = req.body
+
+    const index = listaProdutos.findIndex(produto => produto.id == id)
+
+    const produtoAlterado = {
+        id: id,
+        nome: novosDados.nome,
+        preco: novosDados.preco
+    }
+
+    listaProdutos[index] = produtoAlterado
+
+    res.json({ mensagem: "Produto alterado com sucesso!"})
+
+})
+
 
 
 
