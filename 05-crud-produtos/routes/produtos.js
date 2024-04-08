@@ -28,7 +28,7 @@ router.get('/produtos', (req, res) => {
 // READ -> Buscar o produto pelo ID
 router.get('/produtos/:id', (req, res) => {
     const id = req.params.id
-    const index = listaProdutos.findIndex(produto => produto.id == id)
+    const index = listaProdutos.findIndex(produto => produto.id == id)  
     const produto = listaProdutos[index]
     res.json(produto)
 })
