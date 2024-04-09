@@ -42,8 +42,59 @@ router.post('/produtos', (req, res) => {
 
         listaProdutos.push(produto)
 
-        res.status(201).json({ mensagem: "Produto cadastrado com sucesso!" })
+        res.status(201).json(
+            {
+                mensagem: "Produto cadastrado com sucesso!",
+                produto
+            }
+        )
     }
+})
+
+// UPDATE -> Alterar um produto
+router.put('/produtos/:id', (req, res) => {
+    const id = req.params.id
+    const novosDados = req.body
+
+    if (!novosDados.nome || !novosDados.preco) {
+        res.status(400).json({ mensagem: "Nome e preço são obrigatórios!" })
+    } else {
+
+        const index = listaProdutos.findIndex(produto => produto.id == id)
+        if (index == -1) {
+            res.status(404).json({ mensagem: "Produto não encotrado!" })
+        } else {
+            const produto = {
+                id: Number(id),
+                nome: novosDados.nome,
+                preco: novosDados.preco
+            }
+
+            listaProdutos[index] = produto
+
+            res.status(200).json(
+                {
+                    mensagem: "Produto alterado com sucesso!",
+                    produto
+                }
+            )
+        }
+    }
+})
+
+// DELETE -> Excluir produto
+router.delete('/produtos/:id', (req, res) => {
+    const id = req.params.id
+    const index = listaProdutos.findIndex(produto => produto.id == id)
+    if (index == -1) {
+        res.status(404).json({ mensagem: "Produto não encontrado!" })
+    } else {
+        listaProdutos.splice(index, 1)
+        res.status(200).json({ mensagem: "Produto excluido sucesso!" })
+    }
+
+
+
 })
 
 
