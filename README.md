@@ -1,14 +1,9 @@
 # IESB_construcao_backend
 
-TESTANDO ALTERAÇÕES
-
-
-### CONFIGURAÇÕES VSCODE
-
-Tema:
-- Cobalt2 Theme
+## CONFIGURAÇÕES VSCODE
 
 Extensões:
+
 - Code Runner
 - Material Icon Theme
 - Codeium
