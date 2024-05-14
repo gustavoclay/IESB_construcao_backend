@@ -5,7 +5,7 @@ const cargoSchema = yup.object().shape({
         .string('campo precisa ser uma texto')
         .required('campo obrigatório'),
     descricao: yup
-        .string(),
+        .string('campo precisa ser um texto'),
     salario: yup
         .number('campo precisa ser um numero')
         .min(1412, 'precisa ser maior que o salário minimo')

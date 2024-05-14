@@ -6,16 +6,17 @@ const CargoController = require('../controllers/CargoController')
 const FuncionarioController = require('../controllers/FuncionarioController')
 
 // validators
+const { validarId } = require('../validators/IdValidator')
 const { cargoValidador } = require('../validators/CargoValidator')
 
 // Cargos
 router.post('/cargos', cargoValidador, CargoController.create)
 router.get('/cargos', CargoController.getAll)
-router.get('/cargos/:id', CargoController.getById)
-router.put('/cargos/:id', CargoController.update)
-router.delete('/cargos/:id', CargoController.remove)
+router.get('/cargos/:id', validarId, CargoController.getById)
+router.put('/cargos/:id', validarId, cargoValidador, CargoController.update)
+router.delete('/cargos/:id', validarId, CargoController.remove)
 
-// Funcionarios
+// FuncionariosI
 router.post('/funcionarios', FuncionarioController.create)
 router.get('/funcionarios', FuncionarioController.getAll)
 router.get('/funcionarios/:id', FuncionarioController.getById)
