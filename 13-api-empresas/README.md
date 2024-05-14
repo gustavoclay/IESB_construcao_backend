@@ -1,6 +1,6 @@
 # API-EMPRESAS
 
-Vamos construir uma api com funcionaldiades para que uma empresa realize o gereciamento de seus projetos internos.
+Vamos construir uma api com funcionalidades para que uma empresa realize o gereciamento de seus projetos internos.
 
 ## Modelagem de Dados
 
