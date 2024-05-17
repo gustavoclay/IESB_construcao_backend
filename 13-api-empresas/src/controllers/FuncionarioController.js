@@ -1,23 +1,17 @@
 const Funcionario = require('../models/Funcionario')
 
 async function create(req, res) {
-    try {
-        const funcionario = new Funcionario(req.body)
-        const funcionarioCriado = await funcionario.save()
-        res.status(201).json(funcionarioCriado)
-    } catch (error) {
-        console.error("Erro ao criar funcionario: ", error)
-        res.status(400).json(
-            {
-                mensagem: "Erro ao criar funcionario!",
-                erro: error.message
-            }
-        )
-    }
+    const funcionario = new Funcionario(req.body)
+    const funcionarioCriado = await funcionario.save()
+    res.status(201).json(funcionarioCriado)
+}
+
+async function getAll(req, res) {
+    res.json(await Funcionario.find().populate(['cargo', 'departamento']))
 }
 
 async function getById(req, res) {
-    const funcionario = await Funcionario.findById(req.params.id).populate('cargo')
+    const funcionario = await Funcionario.findById(req.params.id).populate(['cargo', 'departamento'])
     if (funcionario) {
         res.json(funcionario)
     } else {
@@ -25,33 +19,33 @@ async function getById(req, res) {
     }
 }
 
-async function getAll(req, res) {
-    res.json(await Funcionario.find())
-}
-
 async function update(req, res) {
-    try {
-        const funcionario = await Funcionario.findByIdAndUpdate(req.params.id, req.body)
-        res.json(funcionario)
-    } catch (error) {
-        console.error("Erro ao criar funcionario: ", error)
-        res.status(400).json({
-            mensagem: "Erro ao atualizar funcionario!",
-            erro: error.message
-        })
+    const funcionarioAtualizado = await Funcionario.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    if (funcionarioAtualizado) {
+        res.json(funcionarioAtualizado)
+    } else {
+        res.status(404).json({ mensagem: "Funcionario não encontrato!" })
     }
+
 }
 
 async function remove(req, res) {
-    await Funcionario.findByIdAndDelete(req.params.id)
-    res.json({ mensagem: "Funcionario excluido com sucesso!" })
+    const funcionarioExcluido = await Funcionario.findByIdAndDelete(req.params.id)
+    if (funcionarioExcluido) {
+        res.json({
+            mensagem: "Funcionario excluido com sucesso!",
+            funcionarioExcluido
+        })
+    } else {
+        res.status(404).json({ mensagem: "Funcionario não encontrato!" })
+    }
 }
 
-// atualizacao, detele, buscatodos
+
 module.exports = {
     create,
-    getById,
     getAll,
+    getById,
     update,
     remove
 }

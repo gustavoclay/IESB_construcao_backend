@@ -10,6 +10,7 @@ const FuncionarioController = require('../controllers/FuncionarioController')
 const { validarId } = require('../validators/IdValidator')
 const { cargoValidador } = require('../validators/CargoValidator')
 const { departamentoValidador } = require('../validators/DepartamentoValidator')
+const { funcionarioValidador } = require('../validators/FuncionarioValidator')
 
 // Cargos
 router.post('/cargos', cargoValidador, CargoController.create)
@@ -25,12 +26,12 @@ router.get('/departamentos/:id', validarId, DepartamentoController.getById)
 router.put('/departamentos/:id', validarId, departamentoValidador, DepartamentoController.update)
 router.delete('/departamentos/:id', validarId, DepartamentoController.remove)
 
-// FuncionariosI
-router.post('/funcionarios', FuncionarioController.create)
+// Funcionarios
+router.post('/funcionarios', funcionarioValidador, FuncionarioController.create)
 router.get('/funcionarios', FuncionarioController.getAll)
-router.get('/funcionarios/:id', FuncionarioController.getById)
-router.put('/funcionarios/:id', FuncionarioController.update)
-router.delete('/funcionarios/:id', FuncionarioController.remove)
+router.get('/funcionarios/:id', validarId, FuncionarioController.getById)
+router.put('/funcionarios/:id', validarId, funcionarioValidador, FuncionarioController.update)
+router.delete('/funcionarios/:id', validarId, FuncionarioController.remove)
 
 
 module.exports = router
