@@ -1,0 +1,4 @@
+{
+    "ignore": ["src/swagger.json"],
+    "exec": "node src/swagger.js && node src/index.js"
+}
